@@ -27,3 +27,36 @@ export async function getImages(prompt, negative, model, setTarget) {
     setTarget(imageUrl);
   } catch (error) { return error}
 }
+
+export const getZuckyImage = async (prompt, model, setTarget) => { 
+const API_KEY = import.meta.env.VITE_API_KEY;
+const endpoint = "https://zukijourney.xyzbot.net/v1/images/generations"
+    const data = {
+        prompt: prompt,
+        n: 1,
+        size: "1024x1024",
+        model: model,
+      };
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    const imgUrl = await response.json(); //Main response.
+
+    if (!response.ok) {
+      return `ERR_${response.status}: ${imgUrl.error.message}`;
+    }
+
+    imageUrl = imgUrl["data"][0]["url"];
+    setTarget(imgUrl)
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+

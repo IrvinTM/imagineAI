@@ -42,6 +42,8 @@ export function Gen() {
   return (
     <div className="flex flex-row content-center justify-center">
       <div className="flex flex-col items-center">
+      <p className="pb-1">Generate images for free using the NoKey provider. Zuky option</p>
+      <p className="pb-2">available soon. You can get a free api key in their Discord.</p>
         <div className="flex justify-center content-center flex-col lg:flex-row gap-2">
           <div>
             <div className="flex justify-center items-center">

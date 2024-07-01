@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { getImages, getZuckyImage } from "./utils/getImages";
 import { Button, Select, Option } from "@material-tailwind/react";
 import { modelsNoKey, zukyModels, providers } from "./utils/providers";
@@ -22,15 +22,21 @@ export function Gen() {
   const handleAll = async () => {
     setLoading(true);
     if(provider == "Zuky"){
-      getZuckyImage(prompt, model, setImageSrc1)
-      getZuckyImage(`${prompt} full hd`, model, setImageSrc2)
+
+      await Promise.all([
+        getZuckyImage(prompt, model, setImageSrc1),
+        getZuckyImage(`${prompt} full hd`, model, setImageSrc2)
+      ])
+      setTimeout(() => setLoading(false), 3000);
+      
     }
     else{
-      getImages(prompt, negative, model, setImageSrc1)
-      getImages(prompt, negative, model, setImageSrc2)
+      await Promise.all([
+        getImages(prompt, negative, model, setImageSrc1),
+         getImages(prompt, negative, model, setImageSrc2)
+      ])
+      setTimeout(() => setLoading(false), 3000);
     }
-
-    setTimeout(() => setLoading(false), 5000);
   };
 
   return (
@@ -45,55 +51,45 @@ export function Gen() {
                     label="Select Provider"
                     className="text-ellipsis"
                     value={provider}
-                    onChange={(value) => setProvider(value)}
+                    onChange={(providerName) => setProvider(providerName)}
                     animate={{
                       mount: { y: 0 },
                       unmount: { y: 25 },
                     }}
                   >
-                    {providers.map((e, index) => (
-                      <Option className="text-ellipsis" key={index} value={e}>
-                        {e}
+                    {providers.map((providerName, index) => (
+                      <Option key={index} value={providerName}>
+                        {providerName}
                       </Option>
                     ))}
                   </Select>
                 </div>
                 <div className="w-80 mr-8">
                   <Select
+
                     label="Select Model"
-                    value={model}
-                    onChange={(value) => setModel(value)}
+                    
+                    selected={model}
+                    onChange={(modelName) => {setModel(modelName) 
+                      
+                      }}
                     animate={{
                       mount: { y: 0 },
                       unmount: { y: 25 },
                     }}
                   >
-                    {provider === "Nokey" || model !== "Zuky"
-                      ? modelsNoKey.map((e, index) => (
-                          <Option
-                            className="text-ellipsis"
-                            key={index}
-                            value={e}
-                          >
-                            {e}
-                          </Option>
-                        ))
-                      : zukyModels.map((e, index) => (
-                          <Option
-                            className="text-ellipsis"
-                            key={index}
-                            value={e}
-                          >
-                            {e}
-                          </Option>
-                        ))}
+                    {provider == "Zuky" ? (zukyModels.map((modelName,index)=>
+                    <Option className="overflow-hidden" value={modelName}  key={index}>{modelName}</Option>)) :
+                    (modelsNoKey.map((modelName, index)=>
+                      <Option className="overflow-hidden" value={modelName}  key={index}>{modelName}</Option>))}
+                      
                   </Select>
                 </div>
               </div>
             </div>
           </div>
           <div className="mr-8">
-            <div className="w-80 pb-2">
+            <div className="w-full pb-2">
               <div className="relative w-full min-w-[200px] h-10">
                 <input
                   className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
@@ -129,16 +125,16 @@ export function Gen() {
 
         <div className="grid min-h-[140px] w-full place-items-center overflow-hidden rounded-lg p-6">
           <div className="lg:grid lg:grid-cols-2 gap-2 flex flex-col">
-            <div>
+            <div className="w-full">
               <img
-                className="object-cover object-center h-80 max-w-full rounded-lg "
+                className="object-cover object-center max-w-full rounded-lg "
                 src={imageSrc1}
                 alt=""
               />
             </div>
-            <div>
+            <div className="w-full">
               <img
-                className="object-cover object-center h-80 max-w-full rounded-lg "
+                className="object-cover object-center  max-w-full rounded-lg "
                 src={imageSrc2}
                 alt=""
               />

@@ -1,4 +1,4 @@
-    export  const modelsNoKey = [
+    export const modelsNoKey = [
     "3Guofeng3_v34.safetensors [50f420de]",
     "absolutereality_V16.safetensors [37db0fc3]",
     "absolutereality_v181.safetensors [3d9d4d2b]",

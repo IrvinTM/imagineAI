@@ -48,15 +48,31 @@ const endpoint = "https://zukijourney.xyzbot.net/v1/images/generations"
     });
 
     const imgUrl = await response.json(); //Main response.
+    let imageUrl = imgUrl["data"][0]["url"];
+    imageUrlToBase64(imageUrl)
+  .then(base64Image => {
+    setTarget(base64Image)
+  })
 
     if (!response.ok) {
       return `ERR_${response.status}: ${imgUrl.error.message}`;
     }
-
-    imageUrl = imgUrl["data"][0]["url"];
-    setTarget(imgUrl)
+    
   } catch (error) {
     console.error("Error:", error);
   }
 };
+
+function imageUrlToBase64(imageUrl) {
+  return fetch(imageUrl)
+    .then(response => response.blob())
+    .then(blob => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    });
+}
 

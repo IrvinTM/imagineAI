@@ -1,12 +1,12 @@
 import { Gen } from "./Gen";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { StickyNavbar } from "./components/Bar";
 
 export default function App() {
   return (
-    <div className="relative grid min-h-[100vh] w-screen p-8">
-      <Gen>
-      </Gen>
+    <div>
+      <StickyNavbar AppComponent={Gen}></StickyNavbar>
       <ToastContainer></ToastContainer>
     </div>
   );

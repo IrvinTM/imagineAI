@@ -32,33 +32,54 @@ export function Gen() {
       toast.error("Please enter a Prompt")
       return
     }
-    setLoading(true);
     if(provider == "Zuky"){
-      await Promise.all([
-        getZuckyImage(prompt, model, setImageSrc1),
-        getZuckyImage(`${prompt} full hd`, model, setImageSrc2)
-      ])
-      setTimeout(() => setLoading(false), 3000);
-      
-    }
-    else{
-      
+      setLoading(true)
       toast.promise(
-          getImages(prompt, negative, model, setImageSrc1),
-           getImages(prompt, negative, model, setImageSrc2),
+        getZuckyImage(prompt, model, setImageSrc1),
         {
-          pending: 'Promise is pending',
-          success: 'Promise resolved 👌',
-          error: 'Promise rejected 🤯'
+          pending: 'Generating',
+          success: 'Image generated',
+          error: 'Error please give it a minute and try again'
+        }
+      );
+
+        toast.promise(
+          getZuckyImage(prompt, model, setImageSrc2)
+          .finally(()=> setLoading(false)),
+          {
+            pending: 'Generating',
+            success: 'Image generated',
+            error: 'Error please give it a minute and try again'
+          }
+        );
+      }
+    else{
+      setLoading(true);
+      toast.promise(
+
+          getImages(prompt, negative, model, setImageSrc1)
+          .finally(()=> setLoading(false)),
+           
+        {
+          pending: 'Generating',
+          success: 'Image generated',
+          error: 'Error please give it a minute and try again'
         })
-      setTimeout(() => setLoading(false), 3000);
+        toast.promise(
+          getImages(prompt, negative, model, setImageSrc2),
+           
+        {
+          pending: 'Generating',
+          success: 'Image generated',
+          error: 'Error please give it a minute and try again'
+        })
     }
   };
 
   return (
     <div className="flex flex-row content-center justify-center">
       <div className="flex flex-col items-center">
-      <p className="pb-1">Generate images for free using the NoKey provider. Zuky option</p>
+      <p className="pb-1">Generate images for free using the NoKey provider. zukijourney option</p>
       <p className="pb-2">available soon. You can get a free api key in their Discord.</p>
         <div className="flex justify-center content-center flex-col lg:flex-row gap-2">
           <div>

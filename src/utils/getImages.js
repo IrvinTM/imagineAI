@@ -19,13 +19,18 @@ export async function getImages(prompt, negative, model, setTarget) {
       },
       body: JSON.stringify(requestBody),
     });
+    if (!image.ok) {
+      throw new Error(`HTTP error! Status: ${image.status}`);
+    }
     let text = await image.text();
     text = text.substring(text.indexOf("{"), text.length);
     let img = JSON.parse(text);
+    console.log(image.code)
     img = img.images[0].split(";base64,").pop();
     const imageUrl = `data:image/png;base64,${img}`;
     setTarget(imageUrl);
-  } catch (error) { return error}
+  } catch (error) { console.log(error) 
+    throw(error)}
 }
 
 export const getZuckyImage = async (prompt, model, setTarget) => { 
@@ -46,20 +51,21 @@ const endpoint = "https://zukijourney.xyzbot.net/v1/images/generations"
       },
       body: JSON.stringify(data),
     });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
 
-    const imgUrl = await response.json(); //Main response.
+    const imgUrl = await response.json(); 
     let imageUrl = imgUrl["data"][0]["url"];
     imageUrlToBase64(imageUrl)
   .then(base64Image => {
     setTarget(base64Image)
   })
 
-    if (!response.ok) {
-      return `ERR_${response.status}: ${imgUrl.error.message}`;
-    }
+
     
   } catch (error) {
-    console.error("Error:", error);
+    throw error    
   }
 };
 

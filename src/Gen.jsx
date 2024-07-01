@@ -2,6 +2,7 @@ import { useState, useEffect} from "react";
 import { getImages, getZuckyImage } from "./utils/getImages";
 import { Button, Select, Option } from "@material-tailwind/react";
 import { modelsNoKey, zukyModels, providers } from "./utils/providers";
+import { toast } from 'react-toastify';
 export function Gen() {
   const [imageSrc1, setImageSrc1] = useState("");
   const [imageSrc2, setImageSrc2] = useState("");
@@ -20,6 +21,11 @@ export function Gen() {
   };
 
   const handleAll = async () => {
+    if(!provider){
+      console.log("please select a provider")
+      toast.error("Please select a provider.")
+      return
+    }
     setLoading(true);
     if(provider == "Zuky"){
 

@@ -19,16 +19,21 @@ export function Gen() {
   const handleNegativeChange = (event) => {
     setNegative(event.target.value);
   };
-
   const handleAll = async () => {
     if(!provider){
-      console.log("please select a provider")
       toast.error("Please select a provider.")
+      return
+    }
+    if(!model){
+      toast.error("Please select a model")
+      return
+    }
+    if(!prompt){
+      toast.error("Please enter a Prompt")
       return
     }
     setLoading(true);
     if(provider == "Zuky"){
-
       await Promise.all([
         getZuckyImage(prompt, model, setImageSrc1),
         getZuckyImage(`${prompt} full hd`, model, setImageSrc2)
@@ -37,10 +42,15 @@ export function Gen() {
       
     }
     else{
-      await Promise.all([
-        getImages(prompt, negative, model, setImageSrc1),
-         getImages(prompt, negative, model, setImageSrc2)
-      ])
+      
+      toast.promise(
+          getImages(prompt, negative, model, setImageSrc1),
+           getImages(prompt, negative, model, setImageSrc2),
+        {
+          pending: 'Promise is pending',
+          success: 'Promise resolved 👌',
+          error: 'Promise rejected 🤯'
+        })
       setTimeout(() => setLoading(false), 3000);
     }
   };

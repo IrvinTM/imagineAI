@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import {
   Navbar,
   MobileNav,
@@ -6,9 +6,11 @@ import {
   Button,
   IconButton
 } from "@material-tailwind/react";
+import { ApiComponent } from "./Secret";
  
 export function StickyNavbar({AppComponent}) {
-  const [openNav, setOpenNav] = React.useState(false);
+  const [openNav, setOpenNav] = useState(false);
+  const [apiMenu, setApiMenu] = useState(false);
  
   React.useEffect(() => {
     window.addEventListener(
@@ -19,6 +21,8 @@ export function StickyNavbar({AppComponent}) {
  
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+      
+      
       <Typography
         as="li"
         variant="small"
@@ -26,7 +30,7 @@ export function StickyNavbar({AppComponent}) {
         className="p-1 font-normal"
       >
         <a href="#" className="flex items-center">
-          Pages
+          Github
         </a>
       </Typography>
       <Typography
@@ -36,29 +40,16 @@ export function StickyNavbar({AppComponent}) {
         className="p-1 font-normal"
       >
         <a href="#" className="flex items-center">
-          Account
+          How to get api key
         </a>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
+      <Button
         color="blue-gray"
         className="p-1 font-normal"
+        onClick={()=> setApiMenu(!apiMenu)}
       >
-        <a href="#" className="flex items-center">
-          Blocks
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center">
-          Docs
-        </a>
-      </Typography>
+          API KEY
+      </Button>
     </ul>
   );
  
@@ -116,6 +107,10 @@ export function StickyNavbar({AppComponent}) {
         </div>
         <MobileNav open={openNav}>
           {navList}
+        </MobileNav>
+        <MobileNav open={apiMenu}>
+        <ApiComponent setApiMenu={setApiMenu}></ApiComponent>
+      
         </MobileNav>
       </Navbar>
       <div className="pt-20">

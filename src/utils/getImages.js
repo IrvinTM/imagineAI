@@ -34,7 +34,7 @@ export async function getImages(prompt, negative, model, setTarget) {
 }
 
 export const getZuckyImage = async (prompt, model, setTarget) => { 
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_KEY = localStorage.getItem("api_key")
 const endpoint = "https://zukijourney.xyzbot.net/v1/images/generations"
     const data = {
         prompt: prompt,

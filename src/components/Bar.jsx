@@ -54,7 +54,7 @@ export function StickyNavbar({AppComponent}) {
   );
  
   return (
-    <div className="m-1 w-100 overflow-hidden">
+    <div className="m-1 w-100">
       <Navbar className="fixed top-0 z-10 h-max max-w-full rounded-none px-4 lg:px-8 lg:py-4">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography

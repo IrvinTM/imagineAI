@@ -79,8 +79,6 @@ export function Gen() {
   return (
     <div className="flex flex-row content-center justify-center">
       <div className="flex flex-col items-center">
-      <p className="pb-1">Generate images for free using the NoKey provider. zukijourney option</p>
-      <p className="pb-2">available soon. You can get a free api key in their Discord.</p>
         <div className="flex justify-center content-center flex-col lg:flex-row gap-2">
           <div>
             <div className="flex justify-center items-center">
@@ -97,7 +95,7 @@ export function Gen() {
                     }}
                   >
                     {providers.map((providerName, index) => (
-                      <Option key={index} value={providerName}>
+                      <Option translate="no" key={index} value={providerName}>
                         {providerName}
                       </Option>
                     ))}
@@ -118,9 +116,9 @@ export function Gen() {
                     }}
                   >
                     {provider == "Zuky" ? (zukyModels.map((modelName,index)=>
-                    <Option className="overflow-hidden" value={modelName}  key={index}>{modelName}</Option>)) :
+                    <Option translate="no" className="overflow-hidden" value={modelName}  key={index}>{modelName}</Option>)) :
                     (modelsNoKey.map((modelName, index)=>
-                      <Option className="overflow-hidden" value={modelName}  key={index}>{modelName}</Option>))}
+                      <Option translate="no" className="overflow-hidden" value={modelName}  key={index}>{modelName}</Option>))}
                       
                   </Select>
                 </div>

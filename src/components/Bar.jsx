@@ -29,7 +29,7 @@ export function StickyNavbar({AppComponent}) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="https://github.com/IrvinTM/imagineAI.git" className="flex items-center">
+        <a target="_blank" href="https://github.com/IrvinTM/imagineAI.git" className="flex items-center">
           Github
         </a>
       </Typography>
@@ -39,7 +39,7 @@ export function StickyNavbar({AppComponent}) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="https://github.com/zukijourney/api-docs?tab=readme-ov-file" className="flex items-center">
+        <a target="_blank" href="https://github.com/zukijourney/api-docs?tab=readme-ov-file" className="flex items-center">
           How to get api key
         </a>
       </Typography>
@@ -48,7 +48,7 @@ export function StickyNavbar({AppComponent}) {
         className="p-1 font-normal"
         onClick={()=> setApiMenu(!apiMenu)}
       >
-          API KEY
+          SET API KEY
       </Button>
     </ul>
   );

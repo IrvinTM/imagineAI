@@ -32,7 +32,7 @@ export function Gen() {
       toast.error("Please enter a Prompt")
       return
     }
-    if(provider == "Zuky"){
+    if(provider == "Zukijourney"){
       setLoading(true)
       toast.promise(
         getZuckyImage(prompt, model, setImageSrc1),
@@ -116,7 +116,7 @@ export function Gen() {
                       unmount: { y: 25 },
                     }}
                   >
-                    {provider == "Zuky" ? (zukyModels.map((modelName,index)=>
+                    {provider == "Zukijourney" ? (zukyModels.map((modelName,index)=>
                     <Option translate="no" className="overflow-hidden" value={modelName}  key={index}>{modelName}</Option>)) :
                     (modelsNoKey.map((modelName, index)=>
                       <Option translate="no" className="overflow-hidden" value={modelName}  key={index}>{modelName}</Option>))}

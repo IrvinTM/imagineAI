@@ -124,4 +124,4 @@
     "toonyou-beta-6"
 ];
 
-export const providers = ["Zuky", "NoKey"]
+export const providers = ["Zukijourney", "NoKey"]

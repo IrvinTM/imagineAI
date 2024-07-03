@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState} from "react";
 import { getImages, getZuckyImage } from "./utils/getImages";
 import { Button, Select, Option } from "@material-tailwind/react";
 import { modelsNoKey, zukyModels, providers } from "./utils/providers";
@@ -79,6 +79,7 @@ export function Gen() {
   return (
     <div className="flex flex-row content-center justify-center">
       <div className="flex flex-col items-center">
+        <p className="text-center">Note that translating the page may cause issues. Fix soon</p>
         <div className="flex justify-center content-center flex-col lg:flex-row gap-2">
           <div>
             <div className="flex justify-center items-center">

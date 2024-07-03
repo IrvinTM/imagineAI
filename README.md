@@ -12,6 +12,5 @@ npm install
 npm run dev
 ```
 Now you can open 
-```URL
 http://localhost:5173/
-```
+

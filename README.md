@@ -1,4 +1,4 @@
-## WebUI for image generation
+## WebUI for free image generation
 
 https://github.com/IrvinTM/imagineAI/assets/118541846/61ebf219-06fc-48c9-9467-232712be4bfd
 

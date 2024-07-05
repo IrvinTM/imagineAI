@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root, html, body {
+    @apply dark:bg-slate text-[#030712] dark:text-blue-gray-100;
+  }
+
+ul {
+    @apply text-[#030712] dark:text-blue-gray-100 dark:bg-slate !important 
+
+}
+
+li {
+    
+    @apply text-[#030712] dark:text-blue-gray-100 dark:bg-slate dark:hover:bg-blue-gray-500 !important 
+}
+
+label {
+    @apply dark:border-gray-200 text-[#030712] dark:text-blue-gray-100   !important
+}

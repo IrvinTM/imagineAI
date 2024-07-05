@@ -11,6 +11,7 @@ export function Gen() {
   const [model, setModel] = useState("");
   const [loading, setLoading] = useState(false);
   const [provider, setProvider] = useState("");
+  
 
   const handlePromptChange = (event) => {
     setPrompt(event.target.value);
@@ -77,7 +78,7 @@ export function Gen() {
   };
 
   return (
-    <div className="flex flex-row content-center justify-center">
+    <div className="flex flex-row content-center justify-center dark:bg-slate">
       <div className="flex flex-col items-center">
         <div className="flex justify-center content-center flex-col lg:flex-row gap-2">
           <div>
@@ -86,7 +87,8 @@ export function Gen() {
                 <div className="mb-2">
                   <Select
                     label="Select Provider"
-                    className="text-ellipsis"
+                    
+                    className="text-ellipsis text-[#030712] dark:text-blue-gray-100"
                     value={provider}
                     onChange={(providerName) => setProvider(providerName)}
                     animate={{
@@ -95,7 +97,7 @@ export function Gen() {
                     }}
                   >
                     {providers.map((providerName, index) => (
-                      <Option translate="no" key={index} value={providerName}>
+                      <Option className="text-[#030712] dark:text-blue-gray-100 dark:bg-slate" translate="no" key={index} value={providerName}>
                         {providerName}
                       </Option>
                     ))}
@@ -103,7 +105,7 @@ export function Gen() {
                 </div>
                 <div className="w-80 mr-8">
                   <Select
-
+                    className="text-[#030712] dark:text-blue-gray-100"
                     label="Select Model"
                     
                     selected={model}
@@ -116,9 +118,9 @@ export function Gen() {
                     }}
                   >
                     {provider == "Zukijourney" ? (zukyModels.map((modelName,index)=>
-                    <Option translate="no" className="overflow-hidden" value={modelName}  key={index}>{modelName}</Option>)) :
+                    <Option translate="no" className="overflow-hidden text-[#030712] dark:text-blue-gray-100" value={modelName}  key={index}>{modelName}</Option>)) :
                     (modelsNoKey.map((modelName, index)=>
-                      <Option translate="no" className="overflow-hidden" value={modelName}  key={index}>{modelName}</Option>))}
+                      <Option translate="no" className="overflow-hidden text-[#030712] dark:text-blue-gray-100" value={modelName}  key={index}>{modelName}</Option>))}
                       
                   </Select>
                 </div>
@@ -129,7 +131,7 @@ export function Gen() {
             <div className="w-full pb-2">
               <div className="relative w-full min-w-[200px] h-10">
                 <input
-                  className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+                  className="peer w-full text-[#030712] dark:text-blue-gray-100 h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
                   placeholder=" "
                   value={prompt}
                   onChange={handlePromptChange}
@@ -142,7 +144,7 @@ export function Gen() {
             <div className="w-80 pb-2">
               <div className="relative w-full min-w-[200px] h-10">
                 <input
-                  className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+                  className="text-[#030712] dark:text-blue-gray-100 peer w-full h-full bg-transparent  font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
                   placeholder=" "
                   value={negative}
                   onChange={handleNegativeChange}

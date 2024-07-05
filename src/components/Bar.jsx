@@ -7,10 +7,23 @@ import {
   IconButton
 } from "@material-tailwind/react";
 import { ApiComponent } from "./Secret";
+import {
+  MoonIcon,
+  SunIcon
+} from "@heroicons/react/24/outline";
  
 export function StickyNavbar({AppComponent}) {
   const [openNav, setOpenNav] = useState(false);
   const [apiMenu, setApiMenu] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
  
   React.useEffect(() => {
     window.addEventListener(
@@ -27,7 +40,7 @@ export function StickyNavbar({AppComponent}) {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal"
+        className="p-1 font-normal text-[#030712] dark:text-blue-gray-100"
       >
         <a target="_blank" href="https://github.com/IrvinTM/imagineAI.git" className="flex items-center">
           Github
@@ -37,15 +50,21 @@ export function StickyNavbar({AppComponent}) {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal"
+        className="p-1 font-normal text-[#030712] dark:text-blue-gray-100"
       >
         <a target="_blank" href="https://github.com/zukijourney/api-docs?tab=readme-ov-file" className="flex items-center">
           How to get api key
         </a>
       </Typography>
-      <Button
-        color="blue-gray"
-        className="p-1 font-normal"
+      
+      {darkMode&&<button>
+                <MoonIcon className="h-6 text-[#030712] dark:text-blue-gray-100" onClick={()=> setDarkMode(!darkMode)} />
+                </button>}
+                {!darkMode&&<button >
+                <SunIcon className="h-6 text-[#030712] dark:text-blue-gray-100" onClick={()=> setDarkMode(!darkMode)} />
+                </button>}
+                <Button
+        className="p-1 font-normal bg-gray-200 dark:bg-slate dark:border-gray-800 border text-[#030712] dark:text-blue-gray-100"
         onClick={()=> setApiMenu(!apiMenu)}
       >
           SET API KEY
@@ -55,12 +74,12 @@ export function StickyNavbar({AppComponent}) {
  
   return (
     <div className="m-1 w-100">
-      <Navbar className="fixed top-0 z-10 h-max max-w-full rounded-none px-4 lg:px-8 lg:py-4">
-        <div className="flex items-center justify-between text-blue-gray-900">
+      <Navbar className="dark:bg-slate900 dark:border-slate fixed top-0 z-10 h-max max-w-full rounded-none px-4 lg:px-8 lg:py-4">
+        <div className="flex items-center justify-between text-[#030712] dark:text-blue-gray-100">
           <Typography
             as="a"
             href="#"
-            className="mr-4 cursor-pointer py-1.5  font-extrabold"
+            className="mr-4 cursor-pointer py-1.5  font-extrabold "
           >
             AI Image
           </Typography>

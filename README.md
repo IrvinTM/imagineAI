@@ -1,6 +1,6 @@
 #WebUI for image generation
 
-https://github.com/IrvinTM/imagineAI/assets/118541846/7ea3e9fe-e69d-41ce-99ba-a08f67f7d382
+https://github.com/IrvinTM/imagineAI/assets/118541846/61ebf219-06fc-48c9-9467-232712be4bfd
 
 To run it local
 

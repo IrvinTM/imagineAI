@@ -83,7 +83,7 @@ export function Gen() {
         <div className="flex justify-center content-center flex-col lg:flex-row gap-2">
           <div>
             <div className="flex justify-center items-center">
-              <div className="w-80 mr-8">
+              <div className="w-80">
                 <div className="mb-2">
                   <Select
                     label="Select Provider"
@@ -127,11 +127,11 @@ export function Gen() {
               </div>
             </div>
           </div>
-          <div className="mr-8">
+          <div>
             <div className="w-full pb-2">
               <div className="relative w-full min-w-[200px] h-10">
                 <input
-                  className="peer w-full text-[#030712] dark:text-blue-gray-100 h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+                  className="peer w-full text-[#030712] dark:text-blue-gray-100 h-full bg-transparent font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
                   placeholder=" "
                   value={prompt}
                   onChange={handlePromptChange}
@@ -156,7 +156,7 @@ export function Gen() {
             </div>
           </div>
         </div>
-        <div className="pb-2 flex justify-center items-center pr-6 pt-2">
+        <div className="pb-2 flex justify-center items-center pt-2">
           <Button translate="no" loading={loading} onClick={handleAll}>
             Generate
           </Button>

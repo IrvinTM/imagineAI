@@ -156,7 +156,7 @@ export function Gen() {
           </div>
         </div>
         <div className="pb-2 flex justify-center items-center pr-6 pt-2">
-          <Button loading={loading} onClick={handleAll}>
+          <Button translate="no" loading={loading} onClick={handleAll}>
             Generate
           </Button>
         </div>

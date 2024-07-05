@@ -19,3 +19,7 @@ li {
 label {
     @apply dark:border-gray-200 text-[#030712] dark:text-blue-gray-100   !important
 }
+
+div {
+    @apply dark:bg-slate text-[#030712] dark:text-blue-gray-100 !important
+}

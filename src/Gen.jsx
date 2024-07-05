@@ -3,6 +3,7 @@ import { getImages, getZuckyImage } from "./utils/getImages";
 import { Button, Select, Option } from "@material-tailwind/react";
 import { modelsNoKey, zukyModels, providers } from "./utils/providers";
 import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 export function Gen() {
   const [imageSrc1, setImageSrc1] = useState("");
   const [imageSrc2, setImageSrc2] = useState("");
@@ -11,6 +12,7 @@ export function Gen() {
   const [model, setModel] = useState("");
   const [loading, setLoading] = useState(false);
   const [provider, setProvider] = useState("");
+  
   
 
   const handlePromptChange = (event) => {
@@ -64,7 +66,8 @@ export function Gen() {
         {
           pending: 'Generating',
           success: 'Image generated',
-          error: 'Error please give it a minute and try again'
+          error: 'Error please give it a minute and try again',
+          theme: 'dark'
         })
         toast.promise(
           getImages(prompt, negative, model, setImageSrc2),
@@ -79,6 +82,7 @@ export function Gen() {
 
   return (
     <div className="flex flex-row content-center justify-center dark:bg-slate">
+  
       <div className="flex flex-col items-center">
         <div className="flex justify-center content-center flex-col lg:flex-row gap-2">
           <div>

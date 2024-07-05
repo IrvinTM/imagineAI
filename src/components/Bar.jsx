@@ -11,11 +11,15 @@ import {
   MoonIcon,
   SunIcon
 } from "@heroicons/react/24/outline";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
  
 export function StickyNavbar({AppComponent}) {
   const [openNav, setOpenNav] = useState(false);
   const [apiMenu, setApiMenu] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+    const mode =  darkMode ? "dark" : "light"
+
 
   useEffect(() => {
     if (darkMode) {
@@ -135,6 +139,7 @@ export function StickyNavbar({AppComponent}) {
       <div className="pt-20">
       <AppComponent/>
       </div>
+      <ToastContainer theme={mode}></ToastContainer>
     </div>
   );
 }

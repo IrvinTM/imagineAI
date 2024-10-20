@@ -25,9 +25,9 @@ export async function getImages(prompt, negative, model, setTarget) {
     let text = await image.text();
     text = text.substring(text.indexOf("{"), text.length);
     let img = JSON.parse(text);
-    console.log(image.code)
-    img = img.images[0].split(";base64,").pop();
-    const imageUrl = `data:image/png;base64,${img}`;
+    console.log(img);
+    const imageUrl = img.images[0]
+    console.log(imageUrl);
     setTarget(imageUrl);
   } catch (error) { console.log(error) 
     throw(error)}

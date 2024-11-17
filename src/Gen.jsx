@@ -69,7 +69,7 @@ export function Gen() {
           error: 'Error please give it a minute and try again',
           theme: 'dark'
         })
-        toast.promise(
+       toast.promise(
           getImages(prompt, negative, model, setImageSrc2),
            
         {

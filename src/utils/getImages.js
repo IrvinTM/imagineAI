@@ -11,26 +11,55 @@ export async function getImages(prompt, negative, model, setTarget) {
       cfg_scale: 30,
     },
   };
-  try {
-    const image = await fetch(url, {
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
-    });
-    if (!image.ok) {
-      throw new Error(`HTTP error! Status: ${image.status}`);
+    
     }
-    let text = await image.text();
-    text = text.substring(text.indexOf("{"), text.length);
-    let img = JSON.parse(text);
-    console.log(img);
-    const imageUrl = img.images[0]
-    console.log(imageUrl);
-    setTarget(imageUrl);
-  } catch (error) { console.log(error) 
-    throw(error)}
+
+    
+  ).then(async (res) => {
+   const jsonData = await res.json()
+    let id = jsonData.id
+      if(res.status === 429){
+        console.log("rate limit bro ")
+        return
+      }
+
+    console.log("we have an id "+ id)
+    let response = null;
+    let data = true
+    while(data){
+    response = await fetch(
+    `http://nexra.aryahcr.cc/api/image/complements/${encodeURIComponent(id)}`
+    ) 
+        const ob = await response.json()
+        switch(ob.status){
+    case "pending":
+        data= true;
+            
+            console.log("we are waiting")
+        break
+    case "error":
+        data = false
+        break;
+    case "completed":
+          console.log("we got em "+data)
+          setTarget(ob.images[0])
+          data = false
+        break;
+    case "not_found":
+        data = false
+        break;
+    
+    }
+    }
+    }).catch(e =>{
+    console.log(e)
+  })
 }
 
 export const getZuckyImage = async (prompt, model, setTarget) => { 
@@ -41,6 +70,9 @@ const endpoint = "https://zukijourney.xyzbot.net/v1/images/generations"
         n: 1,
         size: "1024x1024",
         model: model,
+        negative_prompt: "bad quality",
+        width: 1024,
+        height: 1024,
       };
   try {
     const response = await fetch(endpoint, {
@@ -56,11 +88,8 @@ const endpoint = "https://zukijourney.xyzbot.net/v1/images/generations"
     }
 
     const imgUrl = await response.json(); 
-    let imageUrl = imgUrl["data"][0]["url"];
-    imageUrlToBase64(imageUrl)
-  .then(base64Image => {
-    setTarget(base64Image)
-  })
+    let imageUrl = imgUrl["data"][0]["url"]
+    setTarget(imageUrl)
 
 
     
